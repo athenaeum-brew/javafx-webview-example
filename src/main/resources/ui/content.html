@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Hello World HTML</title>
+    <style>
+        body {
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            color: #333;
+        }
+    </style>
+</head>
+
+<body onload="changeText()">
+    <h1 id="text">Loading...</h1>
+    <hr>
+    <h1 id="text2"></h1>
+    <hr>
+    <button onclick="callJavaFunction('Hello from JavaScript')">Call Java</button>
+    <script type="text/javascript">
+        function changeText() {
+            document.getElementById('text').innerText = 'Loaded ';
+        }
+        function callJavaFunction(message) {
+            document.getElementById('text').innerText = 'Calling Java w/o window...';
+            requestAnimationFrame(() => {
+                try {
+                    javaBridge.callJavaFunctionFromWebView(message);
+                    document.getElementById('text').innerText = 'Java called!';
+                } catch (error) {
+                    document.getElementById('text2').innerText = "error with window: " + error;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

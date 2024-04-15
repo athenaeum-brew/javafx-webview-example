@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>no title</title>
+</head>
+
+<body onload="changeText()">
+    <h1 id="thymeleaf" th:text="${message}">Default Message</h1>
+    <hr>
+    <h1 id="text">Loading...</h1>
+    <hr>
+    <h1 id="text2">&nbsp;</h1>
+    <button onclick="callJavaFunction(count++)">Call Java</button>
+    <h1 id="text3">&nbsp;</h1>
+    <hr>
+    <h1 id="text4">&nbsp;</h1>
+    <script type="text/javascript">
+        function changeText() {
+            document.getElementById('text2').innerHTML = '... loaded!';
+        }
+        let count = 12;
+        function callJavaFunction(message) {
+            document.getElementById('text3').innerHTML = 'Calling java with ' + message + ' ...';
+            document.getElementById('text4').innerHTML = '&nbsp;';
+            setTimeout(() => {
+                try {
+                    const y = javaBridge.callJavaFunctionFromWebView(message);
+                    document.getElementById('text4').innerHTML = '... java answered! ' + y;
+                } catch (error) {
+                    document.getElementById('text4').innerHTML = "Error: " + error;
+                }
+            }, 100)
+        }
+    </script>
+</body>
+
+</html>

@@ -1,6 +1,7 @@
 package com.cthiebaud.javafx;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import javafx.scene.Scene;
 import javafx.scene.web.WebEngine;
@@ -15,13 +16,14 @@ import netscape.javascript.JSObject;
 public class HelloJavaFXWebViewWorld extends Application {
 
     private JavaBridge javaBridge = new JavaBridge();
+    WebEngine webEngine;
 
     @Override
     public void start(Stage primaryStage) {
         System.out.println("Starting...");
         // Create a WebView to display HTML content
         WebView webView = new WebView();
-        WebEngine webEngine = webView.getEngine();
+        webEngine = webView.getEngine();
 
         // Load HTML content from file using HTMLContentGenerator
         // String htmlContent =
@@ -57,11 +59,34 @@ public class HelloJavaFXWebViewWorld extends Application {
 
     // Java class to bridge between Java and JavaScript
     public class JavaBridge {
-        public int callJavaFunctionFromWebView(String message) throws InterruptedException {
+        public void callJavaFunctionFromWebView(String message) throws InterruptedException {
             int x = Integer.parseInt(message);
             System.out.println("Message from JavaScript: " + message);
-            Thread.sleep(2000);
-            return x * x;
+            Thread messageThread = new Thread(new MessageSender(x));
+            messageThread.start();
+            return;
+        }
+    }
+
+    class MessageSender implements Runnable {
+        int i;
+
+        MessageSender(int i) {
+            this.i = i;
+        }
+
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000); // Sleep for 2 seconds
+                Platform.runLater(() -> {
+                    webEngine.executeScript("document.getElementById('text4').innerHTML += " + (i * i) + ";");
+                    webEngine.executeScript("document.getElementById('spin').style.visibility = 'hidden';");
+                });
+
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 

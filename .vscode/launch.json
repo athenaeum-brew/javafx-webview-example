@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "WebViewExample",
+            "request": "launch",
+            "mainClass": "com.cthiebaud.javafx/com.cthiebaud.javafx.WebViewExample",
+            "projectName": "javafx-example-3"
+        },
+        {
+            "type": "java",
+            "name": "ColorPickerExample",
+            "request": "launch",
+            "mainClass": "com.cthiebaud.javafx/com.cthiebaud.javafx.ColorPickerExample",
+            "projectName": "javafx-example-3"
+        },
+        {
+            "type": "java",
+            "name": "WebViewMouseWheelZoomExample",
+            "request": "launch",
+            "mainClass": "com.cthiebaud.javafx/com.cthiebaud.javafx.WebViewMouseWheelZoomExample",
+            "projectName": "javafx-example-3"
+        },
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}",
+            "projectName": "javafx-example-3"
+        },
+        {
+            "type": "java",
+            "name": "HelloWorldWebView",
+            "request": "launch",
+            "mainClass": "com.cthiebaud.javafx/com.cthiebaud.javafx.HelloJavaFXWebViewWorld",
+            "projectName": "javafx-example-3"
+        },
+    ]
+}
